@@ -17,6 +17,7 @@ import Home from "./src/pages/Home";
 import Search from "./src/pages/Search";
 import Camera from "./src/pages/Camera";
 import PeopleFeed from "./src/pages/PeopleFeed";
+import Profile from "./src/pages/Profile";
 import FeIcon from "react-native-vector-icons/Feather";
 import SLIcon from "react-native-vector-icons/SimpleLineIcons";
 import EntypoIcon from "react-native-vector-icons/Entypo";
@@ -101,7 +102,8 @@ const TabNavigator = createBottomTabNavigator(
     Home: HomeStackNavigator,
     Search,
     Camera,
-    PeopleFeed
+    PeopleFeed,
+    Profile
   },
   {
     defaultNavigationOptions: ({ navigation }) => {
@@ -117,6 +119,8 @@ const TabNavigator = createBottomTabNavigator(
             return <FeIcon name={"plus-square"} size={25} color={tintColor} />;
           } else if (routeName === "PeopleFeed") {
             return <EntypoIcon name={"heart"} size={25} color={tintColor} />;
+          } else if (routeName === "Profile") {
+            return <EntypoIcon name={"user"} size={25} color={tintColor} />;
           }
         }
       };
