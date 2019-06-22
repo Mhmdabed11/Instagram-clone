@@ -1,13 +1,14 @@
 import React from "react";
 import { ThemeContext } from "../../App";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 
 import Stories from "../components/stories";
-
+import Feed from "../components/feed";
+import palette from "../palette";
 const names = [
   "Mohammad",
   "Ahmad",
-  "Yara",
+  "Rahaf",
   "Hasan",
   "Zeinab",
   "Oussama",
@@ -27,20 +28,24 @@ const names = [
   "Khalil"
 ];
 const Home = props => {
+  const ThemeConsumer = React.useContext(ThemeContext);
+  const { theme } = ThemeConsumer;
+  const { darkBody, lightBody } = palette;
   return (
-    <View>
-      <Stories stories={names} />
+    <View
+      style={{
+        backgroundColor: theme === "light" ? lightBody : darkBody,
+        flex: 1
+      }}
+    >
+      <ScrollView>
+        <Stories stories={names} />
+        <Feed />
+      </ScrollView>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
-  }
-});
+const styles = StyleSheet.create({});
 
 export default Home;
