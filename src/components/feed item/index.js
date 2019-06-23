@@ -1,13 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import FeIcon from "react-native-vector-icons/Feather";
+import FaIcon from "react-native-vector-icons/FontAwesome5";
+import SLIcon from "react-native-vector-icons/SimpleLineIcons";
 import { ThemeContext } from "../../../App";
 import palette from "../../palette";
-export default function FeedItem({ username }) {
+export default function FeedItem({ username, likes, caption }) {
   const ThemeConsumer = React.useContext(ThemeContext);
   const { theme } = ThemeConsumer;
 
   const { lightTextColor, darkTextColor } = palette;
+  const formattedLikes = likes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const likesLabel = likes > 1 ? "likes" : "like";
   return (
     <View>
       <View style={styles.feedItemHeader}>
@@ -44,6 +48,60 @@ export default function FeedItem({ username }) {
           }}
         />
       </View>
+      <View style={styles.feedItemBottom}>
+        <View style={styles.actions}>
+          <FeIcon
+            name="heart"
+            style={{ fontSize: 25 }}
+            color={theme === "light" ? lightTextColor : darkTextColor}
+          />
+          <FaIcon
+            name="comment"
+            style={{ fontSize: 25, marginLeft: 15 }}
+            color={theme === "light" ? lightTextColor : darkTextColor}
+          />
+          <SLIcon
+            name="paper-plane"
+            style={{ fontSize: 25, marginLeft: 15 }}
+            color={theme === "light" ? lightTextColor : darkTextColor}
+          />
+        </View>
+        <View>
+          <FeIcon
+            name="bookmark"
+            style={{ fontSize: 25 }}
+            color={theme === "light" ? lightTextColor : darkTextColor}
+          />
+        </View>
+      </View>
+      <View style={styles.likes}>
+        <Text
+          style={{
+            color: theme === "light" ? lightTextColor : darkTextColor,
+            fontWeight: "bold"
+          }}
+        >
+          {`${formattedLikes} ${likesLabel}`}
+        </Text>
+      </View>
+      <View style={styles.caption}>
+        <Text
+          style={{
+            color: theme === "light" ? lightTextColor : darkTextColor,
+            fontWeight: "bold"
+          }}
+        >
+          {username} &nbsp;
+          <Text
+            style={{
+              color: theme === "light" ? lightTextColor : darkTextColor,
+              fontWeight: "normal"
+            }}
+          >
+            {caption}
+          </Text>
+        </Text>
+      </View>
     </View>
   );
 }
@@ -64,5 +122,22 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 50,
     backgroundColor: "#efefef"
+  },
+  feedItemBottom: {
+    flexDirection: "row",
+    padding: 10,
+    justifyContent: "space-between"
+  },
+  actions: {
+    flexDirection: "row"
+  },
+  likes: {
+    paddingLeft: 10,
+    paddingRight: 10
+  },
+  caption: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 5
   }
 });

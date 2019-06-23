@@ -143,7 +143,7 @@ const AppContainer = createAppContainer(TabNavigator);
 
 class App extends React.Component {
   state = {
-    theme: "dark"
+    theme: "light"
   };
 
   toggleTheme = () => {

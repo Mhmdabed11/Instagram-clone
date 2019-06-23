@@ -4,9 +4,13 @@ import { ScrollView, StyleSheet, View } from "react-native";
 export default function Feed(props) {
   return (
     <View>
-      <FeedItem username="mhmd.abed" />
-      <FeedItem username="mhmd.abed" />
-      <FeedItem username="mhmd.abed" />
+      <FeedItem
+        username="mhmd.abed"
+        likes={2453}
+        caption={
+          "Sun in the valley with my dog in love and i went to hiking in aramoun"
+        }
+      />
     </View>
   );
 }
